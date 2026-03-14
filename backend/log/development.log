@@ -1,0 +1,362 @@
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (75.9ms)[0m  [1m[35mCREATE DATABASE "backend_development" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (47.3ms)[0m  [1m[35mCREATE DATABASE "backend_test" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Backend'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-03-14 11:11:36.617681', '2026-03-14 11:11:36.617682') RETURNING "key" /*application='Backend'*/[0m
+Migrating to CreateUsers (20260314110634)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260314110634') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreatePosts (20260314111244)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying NOT NULL, "content" text NOT NULL, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_posts_on_user_id" ON "posts" ("user_id") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260314111244') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+Started GET "/up" for ::1 at 2026-03-14 20:30:26 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Rails::HealthController#show as */*
+  Rendering html template
+  Rendered html template (Duration: 0.0ms | GC: 0.0ms)
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/signup" for ::1 at 2026-03-14 20:30:33 +0900
+Processing by Api::V1::AuthController#signup as */*
+  Parameters: {"user"=>{"name"=>"テストユーザー", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "auth"=>{"user"=>{"name"=>"テストユーザー", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('test@example.com') LIMIT 1 /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ('テストユーザー', 'test@example.com', '$2a$12$dpQXuPekN..fxwHtJ0KpEOvDnqt/81nWjg7/wo3TlBnv4kG.8z9cO', '2026-03-14 11:30:34.050545', '2026-03-14 11:30:34.050545') RETURNING "id" /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+Completed 201 Created in 214ms (Views: 0.1ms | ActiveRecord: 13.4ms (2 queries, 0 cached) | GC: 6.3ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-03-14 20:30:40 +0900
+Processing by Api::V1::AuthController#login as */*
+  Parameters: {"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "auth"=>{"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:19:in `login'
+Completed 200 OK in 172ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-03-14 20:30:48 +0900
+Processing by Api::V1::AuthController#login as */*
+  Parameters: {"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "auth"=>{"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:19:in `login'
+Completed 200 OK in 172ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/posts" for ::1 at 2026-03-14 20:30:48 +0900
+Processing by Api::V1::PostsController#create as */*
+  Parameters: {"post"=>{"title"=>"はじめての投稿", "content"=>"これはテスト投稿です。"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+  [1m[36mPost Create (2.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "user_id", "created_at", "updated_at") VALUES ('はじめての投稿', 'これはテスト投稿です。', 1, '2026-03-14 11:30:48.772429', '2026-03-14 11:30:48.772429') RETURNING "id" /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+Completed 201 Created in 15ms (Views: 0.1ms | ActiveRecord: 4.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-03-14 20:30:57 +0900
+Processing by Api::V1::AuthController#login as */*
+  Parameters: {"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "auth"=>{"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:19:in `login'
+Completed 200 OK in 173ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:30:57 +0900
+Processing by Api::V1::PostsController#index as */*
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 5.3ms)
+
+
+Started GET "/api/v1/posts/1" for ::1 at 2026-03-14 20:30:57 +0900
+Processing by Api::V1::PostsController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 1 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:74:in `post_json'
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/posts/1" for ::1 at 2026-03-14 20:30:57 +0900
+Processing by Api::V1::PostsController#update as */*
+  Parameters: {"post"=>{"title"=>"更新後タイトル", "content"=>"更新後の本文です。"}, "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='update',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:35:in `update'
+  [1m[36mPost Update (0.9ms)[0m  [1m[33mUPDATE "posts" SET "title" = '更新後タイトル', "content" = '更新後の本文です。', "updated_at" = '2026-03-14 11:30:57.913590' WHERE "posts"."id" = 1 /*action='update',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:35:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*action='update',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:35:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:74:in `post_json'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.9ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+Started DELETE "/api/v1/posts/1" for ::1 at 2026-03-14 20:30:57 +0900
+Processing by Api::V1::PostsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:45:in `destroy'
+  [1m[36mPost Destroy (0.4ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = 1 /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:45:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:45:in `destroy'
+Completed 200 OK in 2ms (Views: 0.0ms | ActiveRecord: 1.1ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:30:57 +0900
+Processing by Api::V1::PostsController#index as */*
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 1ms (Views: 0.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-03-14 20:31:10 +0900
+Processing by Api::V1::AuthController#login as */*
+  Parameters: {"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "auth"=>{"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:19:in `login'
+Completed 200 OK in 174ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/signup" for ::1 at 2026-03-14 20:31:10 +0900
+Processing by Api::V1::AuthController#signup as */*
+  Parameters: {"user"=>{"name"=>"別ユーザー", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "auth"=>{"user"=>{"name"=>"別ユーザー", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('other@example.com') LIMIT 1 /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ('別ユーザー', 'other@example.com', '$2a$12$1IGJRQgVXzmYnUsLOttDJeyudbSi68bTzW3JVQj5tH9gaQ/X6SuEu', '2026-03-14 11:31:10.457428', '2026-03-14 11:31:10.457428') RETURNING "id" /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+Completed 201 Created in 174ms (Views: 0.1ms | ActiveRecord: 1.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-03-14 20:31:10 +0900
+Processing by Api::V1::AuthController#login as */*
+  Parameters: {"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "auth"=>{"session"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'other@example.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:19:in `login'
+Completed 200 OK in 174ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/posts" for ::1 at 2026-03-14 20:31:10 +0900
+Processing by Api::V1::PostsController#create as */*
+  Parameters: {"post"=>{"title"=>"認可テスト投稿", "content"=>"本文"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+  [1m[36mPost Create (0.6ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "user_id", "created_at", "updated_at") VALUES ('認可テスト投稿', '本文', 1, '2026-03-14 11:31:10.652809', '2026-03-14 11:31:10.652809') RETURNING "id" /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+Completed 201 Created in 3ms (Views: 0.1ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/api/v1/posts/2" for ::1 at 2026-03-14 20:31:10 +0900
+Processing by Api::V1::PostsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 2 LIMIT 1 /*action='destroy',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+Filter chain halted as :authorize_post! rendered or redirected
+Completed 403 Forbidden in 1ms (Views: 0.0ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/posts" for ::1 at 2026-03-14 20:31:10 +0900
+Processing by Api::V1::PostsController#create as */*
+  Parameters: {"post"=>{"title"=>"不正投稿", "content"=>"本文"}}
+Filter chain halted as :authenticate_user! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/signup" for ::1 at 2026-03-14 20:31:24 +0900
+Processing by Api::V1::AuthController#signup as HTML
+  Parameters: {"user"=>{"name"=>"山本浩希", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "auth"=>{"user"=>{"name"=>"山本浩希", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (5.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('sotb52cb@gmail.com') LIMIT 1 /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ('山本浩希', 'sotb52cb@gmail.com', '$2a$12$cyXTux0AyB2DyiRp.xmwUey5Im4IHGyV6TFR7iCxV1VncnmPtE1Q2', '2026-03-14 11:31:25.021085', '2026-03-14 11:31:25.021085') RETURNING "id" /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT /*action='signup',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+Completed 201 Created in 212ms (Views: 0.0ms | ActiveRecord: 6.6ms (2 queries, 0 cached) | GC: 4.2ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:31:25 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:31:25 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:31:38 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:31:38 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts/2" for ::1 at 2026-03-14 20:31:45 +0900
+Processing by Api::V1::PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 2 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:74:in `post_json'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts/2" for ::1 at 2026-03-14 20:31:45 +0900
+Processing by Api::V1::PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 2 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:74:in `post_json'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:31:47 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:31:47 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/posts" for ::1 at 2026-03-14 20:34:26 +0900
+Processing by Api::V1::PostsController#create as HTML
+  Parameters: {"post"=>{"title"=>"初めての投稿", "content"=>"Claude codeを使用した投稿アプリの作成"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+  [1m[36mPost Create (1.2ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "user_id", "created_at", "updated_at") VALUES ('初めての投稿', 'Claude codeを使用した投稿アプリの作成', 3, '2026-03-14 11:34:26.062008', '2026-03-14 11:34:26.062008') RETURNING "id" /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:25:in `create'
+Completed 201 Created in 9ms (Views: 0.1ms | ActiveRecord: 3.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts/3" for ::1 at 2026-03-14 20:34:26 +0900
+Processing by Api::V1::PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 3 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:74:in `post_json'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts/3" for ::1 at 2026-03-14 20:34:26 +0900
+Processing by Api::V1::PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = 3 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:52:in `set_post'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='show',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:74:in `post_json'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:34:31 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (3, 1) /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/posts" for ::1 at 2026-03-14 20:34:31 +0900
+Processing by Api::V1::PostsController#index as HTML
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (3, 1) /*action='index',application='Backend',controller='posts'*/[0m
+  ↳ app/controllers/api/v1/posts_controller.rb:12:in `map'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
