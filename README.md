@@ -1,5 +1,5 @@
 # Claude-postapp
-
+Claude code の理解を深めるためにユーザー投稿型のアプリを作成しました。
 Ruby on Rails + React + TypeScript で構築した投稿アプリです。
 
 ## 技術構成
